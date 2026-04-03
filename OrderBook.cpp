@@ -1,5 +1,8 @@
 #include "OrderBook.hpp"
 #include "Transaction.hpp"
+#include <iostream>
+using namespace std;
+
 
 OrderBook::OrderBook(){
     this -> buy_order_list = DoubleLinkedList();
@@ -210,4 +213,45 @@ Transaction* OrderBook::getTransactions(int *n){
     }
 
     return transactions_copy;
+}
+
+void OrderBook::printBuyOrders(){
+    cout << "Buy Orders" << endl;
+
+    Node* current = buy_order_list.getHead();
+    
+    if(current == nullptr){
+        cout << "(empty)"<<endl;
+    }
+
+    while(current != nullptr){
+        cout<<"["<< current->order.getId()<< " | " << current->order.getPrice() << " | " << current->order.getTimestamp() << "]" << endl;
+    }
+}
+
+void OrderBook::printSellOrders(){
+    cout << "Sell Orders" << endl;
+
+    Node* current = sell_order_list.getHead();
+    
+    if(current == nullptr){
+        cout << "(empty)"<<endl;
+    }
+
+    while(current != nullptr){
+        cout<<"["<< current->order.getId()<< " | " << current->order.getPrice() << " | " << current->order.getTimestamp() << "]" << endl;
+    }
+}
+
+void OrderBook::printTransactions(){
+    cout << "Transactions" << endl;
+
+    if(transactions_count == 0){
+        cout << "(empty)" << endl;
+    }
+
+    else
+        for(int i = 0; transactions_count; i++){
+            cout << "[" << transactions[i].getBuyOrderId() << ", " << transactions[i].getSellOrderId() << ", " << transactions[i].getExecutionPrice() << "]" << endl;
+        }
 }
