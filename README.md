@@ -2,7 +2,7 @@ Repositório destinado a entrega da lista 2 da disciplina de Estrutura de Dados.
 
 # Descrição do Sistema
 
-O repositório implementa e simula um sistema de livro de ordens (Order Book), estrutura fundamental em mercados financeiros. No contexto do sistema, usuários podem submeter ordens de compra ('B') ou de venda ('S') com um preço e um timestamp associados. O sistema então tenta realizar o pareamento (matching) entre ordens compatíveis, gerando transações quando possível.
+O repositório implementa e simula um sistema de livro de ofertas (Order Book), estrutura fundamental em mercados financeiros. No contexto do sistema, usuários podem submeter ordens de compra ('B') ou de venda ('S') com um preço e um timestamp associados. O sistema então tenta realizar o pareamento (matching) entre ordens compatíveis, gerando transações quando possível. Caso o pareamento não ocorra a ordem então é armazenada na estrutura de dados adequada (lista de compra ou de venda).
 
 Cada ordem possui um identificador único, um tipo (compra ou venda), um preço e um timestamp que indica o momento em que foi criada. Quando uma ordem de compra é submetida, o sistema busca a ordem de venda com o menor preço disponível que seja igual ou inferior ao preço ofertado pelo comprador. De forma análoga, quando uma ordem de venda é submetida, o sistema busca a ordem de compra com o maior preço disponível que seja igual ou superior ao preço pedido pelo vendedor. Em caso de empate no preço, a prioridade é dada à ordem com o menor timestamp (ou seja, a mais antiga).
 
