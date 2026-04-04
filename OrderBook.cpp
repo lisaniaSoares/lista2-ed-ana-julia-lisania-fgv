@@ -218,15 +218,19 @@ Transaction* OrderBook::getTransactions(int *n){
 void OrderBook::printBuyOrders(){
     cout << "Buy Orders:" << endl;
 
-    Node* current = buy_order_list.getHead();
-    
-    if(current == nullptr){
+    int n;
+    Order* orders = getBuyOrders(&n);
+
+    if(orders == nullptr){
         cout << "(empty)"<<endl;
     }
 
-    while(current != nullptr){
-        cout<<"["<< current->order.getId()<< " | " << current->order.getPrice() << " | " << current->order.getTimestamp() << "]" << endl;
-        current = current->next;
+    else {
+        for (int i = 0; i < n; i++){
+            cout << "[" << orders[i].getId()<<" | "<< orders[i].getPrice() << " | " << orders[i].getTimestamp() << "]" << endl; 
+        }
+
+        delete[] orders;
     }
 
     cout << "\n";
@@ -235,15 +239,19 @@ void OrderBook::printBuyOrders(){
 void OrderBook::printSellOrders(){
     cout << "Sell Orders:" << endl;
 
-    Node* current = sell_order_list.getHead();
-    
-    if(current == nullptr){
+    int n;
+    Order* orders = getSellOrders(&n);
+
+    if(orders == nullptr){
         cout << "(empty)"<<endl;
     }
 
-    while(current != nullptr){
-        cout<<"["<< current->order.getId()<< " | " << current->order.getPrice() << " | " << current->order.getTimestamp() << "]" << endl;
-        current = current->next;
+    else {
+        for (int i = 0; i < n; i++){
+            cout << "[" << orders[i].getId()<<" | "<< orders[i].getPrice() << " | " << orders[i].getTimestamp() << "]" << endl; 
+        }
+
+        delete[] orders;
     }
 
     cout << "\n";
@@ -253,12 +261,18 @@ void OrderBook::printSellOrders(){
 void OrderBook::printTransactions(){
     cout << "Transactions:" << endl;
 
-    if(transactions_count == 0){
+    int n;
+    Transaction* transactions_copy = getTransactions(&n);
+
+    if(transactions_copy == nullptr){
         cout << "(empty)" << endl;
     }
 
-    else
-        for(int i = 0; i < transactions_count; i++){
-            cout << "[" << transactions[i].getBuyOrderId() << ", " << transactions[i].getSellOrderId() << ", " << transactions[i].getExecutionPrice() << "]" << endl;
+    else {
+        for (int i = 0; i < n; i++){
+            cout << "[" << transactions_copy[i].getBuyOrderId() <<" | "<< transactions_copy[i].getSellOrderId() << " | " << transactions_copy[i].getExecutionPrice() << "]" << endl; 
         }
+
+        delete[] transactions_copy;
+    }
 }

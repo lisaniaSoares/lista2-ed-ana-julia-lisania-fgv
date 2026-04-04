@@ -73,14 +73,23 @@ int main(void){
     Order s4(7, 'S', 100.0, 7); // chegou antes, deve ter prioridade
     Order s5(8, 'S', 100.0,  8); // chegou depois
 
-    book.submit(s4);
-    book.submit(s5);
+    bool r7 = book.submit(s4);
+    bool r8 = book.submit(s5);
+
+    cout << "submit(bs, id: 7, venda: 100)  -> " << (r7 ? "EXECUTADO" : "NA FILA") << " (Status esperado: NA FILA)" << endl;
+    cout << "submit(bs, id: 8, venda: 100)  -> " << (r8 ? "EXECUTADO" : "NA FILA") << " (Status esperado: NA FILA)" << endl;
+    cout << "\n";
+
+    book.printBuyOrders();
+    book.printSellOrders();
+    book.printTransactions();
 
     // Entre s4 e s5 (mesmo preço 100), s4 tem timestamp menor, prioridade
     Order b4(9, 'B', 105.0, 9);
-    bool r7 = book.submit(b4);
+    bool r9 = book.submit(b4);
 
-    cout << "submit(b4, id: 9, compra: 105)  -> " << (r7 ? "EXECUTADO" : "NA FILA") << " (Status esperado: EXECUTADO)" << endl;
+    cout << "\n";
+    cout << "submit(b4, id: 9, compra: 105)  -> " << (r9 ? "EXECUTADO" : "NA FILA") << " (Status esperado: EXECUTADO)" << endl;
     cout << "\n";
 
     book.printBuyOrders();
