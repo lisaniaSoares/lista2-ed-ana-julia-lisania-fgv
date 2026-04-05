@@ -13,6 +13,7 @@ private:
     DoubleLinkedList sell_order_list;
     Transaction* transactions;
     int transactions_count;
+    int transaction_capacity;
 
 public:
 

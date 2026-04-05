@@ -7,8 +7,9 @@ using namespace std;
 OrderBook::OrderBook(){
     this -> buy_order_list = DoubleLinkedList();
     this -> sell_order_list = DoubleLinkedList();
-    this -> transactions = new Transaction[200];
     this -> transactions_count = 0;
+    this -> transaction_capacity = 200;
+    this -> transactions = new Transaction[transaction_capacity];
     
 }
 
@@ -61,6 +62,19 @@ bool OrderBook::submit(Order order){
 
         } else {
             Transaction buy_t = Transaction(order.getId(), choosed_sell -> order.getId(), lowest_price);
+
+            if (transactions_count == transaction_capacity){
+                this -> transaction_capacity *= 2;
+                Transaction* new_transactions = new Transaction[transaction_capacity];
+
+                for (int i = 0; i < transactions_count; i++){
+                    new_transactions[i] = transactions[i];
+                }
+
+                delete[] transactions;
+                this -> transactions = new_transactions;
+            }
+
             this -> transactions[transactions_count] = buy_t;
             transactions_count++;
 
@@ -112,6 +126,19 @@ bool OrderBook::submit(Order order){
 
         } else {
             Transaction sell_t = Transaction(choosed_buy -> order.getId(), order.getId(), highest_price);
+
+             if (transactions_count == transaction_capacity){
+                this -> transaction_capacity *= 2;
+                Transaction* new_transactions = new Transaction[transaction_capacity];
+
+                for (int i = 0; i < transactions_count; i++){
+                    new_transactions[i] = transactions[i];
+                }
+
+                delete[] transactions;
+                this -> transactions = new_transactions;
+            }
+            
             this -> transactions[transactions_count] = sell_t;
             transactions_count++;
 
