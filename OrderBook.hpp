@@ -30,13 +30,6 @@ public:
     void printSellOrders();
     void printTransactions();
 
-    // Outros métodos auxiliares, se necessário
 };
 
 #endif
-
-// Coments para o relatório:
-
-    // Ideia: criar uma lista com a estrutura de uma lista encadeada simples (assim, conseguimos gerenciar a ordem
-    // das ordens de compra e de venda). E, para as transações um array simples talvez. Ponto negativo: tirar um elemento
-    // do meio seria muito trabalhoso, e a possibilidade de acontecer em nosso sistema é grande.
